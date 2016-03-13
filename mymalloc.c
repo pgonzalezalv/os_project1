@@ -6,63 +6,11 @@
 
 #include "mymalloc.h"
 
-void *mymalloc(size_t size)
-{
-    //HOW TO BRING HEAP HERE ??
-    if (head)
-    {
-    
-        block founded = findBlock(size) ;
-    
-        if (founded == NULL)
-        {
-            errno = ENOMEM ;
-            return NULL ;
-        }
-    
-        if (founded->size != size + SIZE_B)
-        {
-            splitBlock(founded, size) ;
-        }
-    
-    return founded ;
-    }
-    else
-    {
-        errno = ENOMEM ;
-        return NULL ;
-    }
-}
+void *mymalloc(size_t size) {
+  if (initialized == 0) { /* 1st mymalloc call*/
+    int initSize = argv[1];
+  } else { /* nth mymalloc call*/
+    /* code */
+  }
 
-
-block *findBlock(size_t size)
-{
-    block current = head ;
-    block prev    = NULL ;
-    
-    while (current)
-    {
-        if ((current->size) >= (size + SIZE_B) && (current->free==1))
-        {
-            current->free = 0 ;
-            return(current) ;
-        }
-        current = current->next ;
-        prev    = current ;
-    }
-    return(NULL) ;
-}
-
-
-void splitBlock(block ok, size_t size) 
-{
-    block newNext ;
-    newNext       = ok + size + SIZE_B ; // WHATTTTTT ???
-    newNext->size = ok->size - size - SIZE_B ;
-    newNext->next = ok->next ;
-    newNext->prev = ok ;
-    newNext->free = 1 ;
-    ok->next = newNext ;
-    ok->size = size ;
-    return ;
 }
