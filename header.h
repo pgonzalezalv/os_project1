@@ -10,5 +10,7 @@ struct block
 
 block head ;
 
+#define BLOCK_SIZE 16
+
 void *mymalloc(size_t size);
 void *myfree(void *ptr);

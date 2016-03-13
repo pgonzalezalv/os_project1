@@ -7,17 +7,17 @@
 int main(int argc, char *argv[])
 {
     int initSize = argv[1] ; // TO BE INITIALIZED
-    
+
     head = sbrk(0) ; // save a pointer to the last break
 
     //sbrk((sizeof(block)) + initSize) ; // NEEDED ??
-    
+
     // TEST1 : HEAP WELL CREATED
-    if((sbrk((sizeof(struct block)) + initSize)) == (void*)-1)
+    if((sbrk(BLOCK_SIZE + initSize)) == (void*)-1)
     {
         return NULL ;
     }
     head->size = initSize ;
     return 0 ;
-    
+
 }
