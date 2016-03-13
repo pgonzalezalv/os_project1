@@ -1,18 +1,24 @@
-// creation of a type to represent our HEAP
-typedef struct block *block;
-struct block
-{
-    size_t size ; // size of the block
-    int    free ; // 1 if the block is free, 0 if not
-    block  next ; // pointer to the next block
-    block  prev ; // pointer to the previous block
+#ifndef _HEADER_H
+#define _HEADER_H
+
+/* structure representing the head*/
+typedef struct block_header *block_header; /* by default a pointer */
+struct block_header {
+  unsigned int size : 29, /* int : value up to 2^29*/
+               zero : 2,
+               alloc : 1; /* boolean : 0 if free bloc, 1 if allocated bloc*/
 };
 
-block head ;
+/* MACROS */
+#define SIZE_BLOCK_HEADER 32
 
-#define SIZE_B 16
+/* GLOBAL VARIABLES */
+extern int initialized;
+extern block_header head;
+// sub-function to get a pointer to a block that correspond
+block *findBlock(size_t size) ;
 
-void *mymalloc(size_t size);
-void *myfree(void *ptr);
+// sub-function to split the block if necessary
+void splitBlock(block ok, size_t size) ;
 
-#define sizeB 16 //TO DETERMINE, IS IT GOOD ?
+#endif
