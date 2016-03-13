@@ -1,13 +1,5 @@
-//
-//  mymalloc.h
-//  
-//
-//  Created by Doriane OLEWICKI on 13/03/16.
-//
-//
+// sub-function to get a pointer to a block that correspond
+block *findBlock(size_t size) ;
 
-#ifndef mymalloc_h
-#define mymalloc_h
-
-
-#endif /* mymalloc_h */
+// sub-function to split the block if necessary
+void splitBlock(block ok, size_t size) ;

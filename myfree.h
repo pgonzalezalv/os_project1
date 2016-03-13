@@ -1,13 +1,2 @@
-//
-//  myfree.h
-//  
-//
-//  Created by Doriane OLEWICKI on 13/03/16.
-//
-//
-
-#ifndef myfree_h
-#define myfree_h
-
-
-#endif /* myfree_h */
+// sub-function to fusion the block with free blocks that would be around it
+void fusion(block a) ;

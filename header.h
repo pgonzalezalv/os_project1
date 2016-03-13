@@ -11,3 +11,5 @@ block head ;
 
 void *mymalloc(size_t size);
 void *myfree(void *ptr);
+
+#define sizeB 16 //TO DETERMINE, IS IT GOOD ?

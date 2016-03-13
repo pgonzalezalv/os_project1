@@ -3,11 +3,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-// sub-function to fusion the block with free blocks that would be around it
-void fusion(block a) ;
+#include "myfree.h"
+
 void *myfree(void *ptr)
 {
-    block toFree = ptr - sizeof(block) ;
+    block toFree = ptr - sizeB ;
     toFree->free = 1 ;
     fusion(toFree) ;
     return ;
@@ -21,13 +21,13 @@ void fusion(block a)
     if (prev && prev->free)
     {
         a->prev = prev->prev ;
-        a->size += prev->size + sizeof(block) ;
+        a->size += prev->size + sizeB ;
         prev = NULL ;
     }
     if (next != NULL && next->free)
     {
         a->next = next->next ;
-        a->size += next->size + sizeof(block) ;
+        a->size += next->size + sizeB ;
         next = NULL ;
     }
     return ;
