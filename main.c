@@ -8,17 +8,17 @@
 int main(int argc, char *argv[])
 {
     int initSize = argv[1] ; // TO BE INITIALIZED
-    
+
     head = sbrk(0) ; // save a pointer to the last break
 
     //sbrk((sizeof(block)) + initSize) ; // NEEDED ??
-    
+
     // TEST1 : HEAP WELL CREATED
-    if((sbrk(sizeB + initSize)) == (void*)-1)
+    if((sbrk(SIZE_B + initSize)) == (void*)-1)
     {
         return NULL ;
     }
     head->size = initSize ;
     return 0 ;
-    
+
 }

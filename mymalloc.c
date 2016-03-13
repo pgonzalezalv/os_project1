@@ -20,7 +20,7 @@ void *mymalloc(size_t size)
             return NULL ;
         }
     
-        if (founded->size != size + sizeB)
+        if (founded->size != size + SIZE_B)
         {
             splitBlock(founded, size) ;
         }
@@ -42,7 +42,7 @@ block *findBlock(size_t size)
     
     while (current)
     {
-        if ((current->size) >= (size + sizeB) && (current->free==1))
+        if ((current->size) >= (size + SIZE_B) && (current->free==1))
         {
             current->free = 0 ;
             return(current) ;
@@ -57,8 +57,8 @@ block *findBlock(size_t size)
 void splitBlock(block ok, size_t size) 
 {
     block newNext ;
-    newNext       = ok + size + sizeB ; // WHATTTTTT ???
-    newNext->size = ok->size - size - sizeB ;
+    newNext       = ok + size + SIZE_B ; // WHATTTTTT ???
+    newNext->size = ok->size - size - SIZE_B ;
     newNext->next = ok->next ;
     newNext->prev = ok ;
     newNext->free = 1 ;
