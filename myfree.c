@@ -3,8 +3,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "main.h"
+
 void myfree(void *ptr)
 {
-    ptr->alloc = 0 ;
+    block_header B = (block_header) ptr ;
+    B->alloc = 0 ;
 }
 
