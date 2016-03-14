@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "../local/include/CUnit/Cunit.h"
+#include "$(HOME)/local/include/CUnit/Cunit.h"
 
 #include "test.h"
 #include "mymalloc.h"
@@ -22,13 +22,58 @@ int clean_suite1(void) {
 void test_mymalloc_1(void)
 {
     void *ptr = mymalloc((size_t) 32) ;
-    //CU_ASSERT_PTR_NOT_EQUAL(ptr, NULL) ;
+ 
     if (ptr == NULL)
     {
         CU_FAIL("Error : pointer hasn't been assigned. mymalloc failed.") ;
     }
 }
 
+
+void test_mymalloc_2(void)
+{
+    block_header *ptr = (block_header) mymalloc((size_t) 32) ;
+
+    if (ptr->size != 32)
+    {
+        CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
+    }
+}
+
+void test_mymalloc_3(void)
+{
+    block_header *ptr = (block_header) mymalloc((size_t) 31) ;
+  
+    if (ptr->size != 32)
+    {
+        CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
+    }
+}
+
+void test_myfree(void)
+{
+    void *ptr = mymalloc((size_t) 32) ;
+    myfree(ptr) ;
+    
+    if (ptr != NULL)
+    {
+        CU_FAIL("Error : pointer hasn't been disassigned. mymalloc failed.") ;
+    }
+}
+
+void test_mycalloc(void)
+{
+    block_header *ptr = (block_header) mycalloc((size_t) 32) ;
+    size_t i ;
+    for (i=0; i<ptr->size; i++)
+    {
+        if (ptr[i * 2] != NULL)
+        {
+            CU_FAIL("Error : pointed zone hasn't been initialized to 0 correctly. mymalloc failed.") ;
+        }
+    }
+    return ;
+}
 
 int main(int argc, char *argv[])
 {
