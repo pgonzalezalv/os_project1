@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include "main.h"
+#include "test.h"
 #include "mymalloc.h"
 
 void *mycalloc(size_t size)
@@ -15,7 +15,7 @@ void *mycalloc(size_t size)
         size_t i ;
         for (i=0; i<size; i++)
         {
-            founded[i] = 0 ; // ptr bytes ou char ? QUESTION
+            founded[i * 2] = 0 ;
         }
     }
     return(founded) ;

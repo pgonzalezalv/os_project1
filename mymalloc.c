@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include "main.h"
+#include "test.h"
 #include "mymalloc.h"
 
 void *mymalloc(size_t size)
@@ -18,7 +18,7 @@ void *mymalloc(size_t size)
     }
     else /* 1st mymalloc call*/
     {
-        head = sbrk(0) ;
+        head = (block_header) sbrk(0) ;
         if (sbrk(SIZE_INIT + SIZE_BLOCK_HEADER) == (void*)-1)
         {
             return NULL ;
@@ -61,7 +61,7 @@ void *findBlock(size_t size)
                 bestFit = current ;
             }
         }
-        current += current->size ; // Ptr en bytes ou char, QUESTION ???
+        current += ((current->size) * 2) ;
     }
     
     if (bestFit)
@@ -78,7 +78,7 @@ void splitBlock(block_header B, size_t size)
     {
         size_t currentsize = B->size ;
         B->size = size ;
-        block_header next = B + size + SIZE_BLOCK_HEADER ; // Ptr en bytes ou char, QUESTION ???
-        next->size = currentsize - size  - SIZE_BLOCK_HEADER ;
+        block_header next = B + ((size + SIZE_BLOCK_HEADER) * 2) ;
+        next->size = currentsize - ((size  + SIZE_BLOCK_HEADER) * 2) ;
     }
 }

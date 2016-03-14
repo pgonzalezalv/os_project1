@@ -9,5 +9,6 @@
 #ifndef mycalloc_h
 #define mycalloc_h
 
+void *mycalloc(size_t size) ;
 
 #endif /* mycalloc_h */

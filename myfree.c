@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "main.h"
+#include "test.h"
 
 void myfree(void *ptr)
 {

@@ -9,6 +9,7 @@
 extern block_header head;
 
 /* FUNCTIONS SIGNATURES */
+void *mymalloc(size_t size) ;
 void *findBlock(size_t size) ;
 size_t round4(size_t num) ;
 void splitBlock(block_header B, size_t size) ;
