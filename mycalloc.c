@@ -6,16 +6,16 @@
 
 #include "main.h"
 #include "mymalloc.h"
-#include "mycalloc.h"
 
 void *mycalloc(size_t size)
 {
-    size_t* founded = malloc (size) ;
+    size_t *founded = (size_t*) malloc(size) ;
     if (founded)
     {
-        for (size_t i=0; i<size; i++)
+        size_t i ;
+        for (i=0; i<size; i++)
         {
-            founded[i] = 0 ;
+            founded[i] = 0 ; // ptr bytes ou char ? QUESTION
         }
     }
     return(founded) ;
