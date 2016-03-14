@@ -10,9 +10,13 @@ struct block_header { /*structure representing the head*/
 };
 
 /* MACROS */
-#define SIZE_BLOCK_HEADER 32
+#define SIZE_BLOCK_HEADER 4 // in BYTES
 
 /* GLOBAL VARIABLES */
 extern block_header head;
 
 #endif
+
+block_header findBlock(size_t size) ;
+size_t round4(size_t num) ;
+void splitBlock(block_header B, size_t size) ;
