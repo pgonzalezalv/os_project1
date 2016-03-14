@@ -31,10 +31,12 @@ déplacer des blocs déjà alloués. Seuls les blocs libres peuvent être manipu
 Les fichiers sans commentaires ont un nom suffisamment explicite pour savoir
 ce qu'ils contiennent.
 
-* `./header.h`
+* `./main.h`
 * `./main.c`
-* `./MAKEFILE`
+* `./Makefiles`
 * `./myfree.c`
+* `./myfree.h`
 * `./mymalloc.c`
+* `./mymalloc.h`
 
 <!-- ### Known Issues -->
