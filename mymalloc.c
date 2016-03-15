@@ -103,6 +103,7 @@ void *findBlock(size_t size)
         currentSize = 0 ;
         while ((current + currentSize < tail) && ((current + currentSize)->alloc==0))
         {
+            printf("un tour");
             currentSize += ((current + currentSize)->size + (size_t)SIZE_BLOCK_HEADER)/4 ;
         }
         
