@@ -86,10 +86,10 @@ void *findBlock(size_t size)
     block_header bestFit ; // block that will be returned
     
     size_t i ;
-    for (i = (size_t)head; i<(size_t)tail; i+=(current->size + SIZE_BLOCK_HEADER)) // while we are in the allocable zone in the heap !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    for (i = (size_t)head; i<(size_t)tail; i+=(current->size)) // while we are in the allocable zone in the heap !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         current = (block_header) i ;
     {
-        if ((current->size >= (size + SIZE_BLOCK_HEADER) && current->alloc==0) && (current->size < bestFit->size))
+        if ((current->size >= (size) && current->alloc==0) && (current->size < bestFit->size))
         {
             bestFit = current ;
         }
@@ -110,14 +110,14 @@ void *findBlock(size_t size)
  */
 void splitBlock(block_header B, size_t size)
 {
-    if (B->size > (size + SIZE_BLOCK_HEADER))
+    if (B->size > (size))
     {
         size_t currentsize = B->size ; // memory of the block's size
         B->size = size ; // change the size of B
-        block_header next = B + ((size + SIZE_BLOCK_HEADER)) ; // create a new block after B
+        block_header next = B + ((size)) ; // create a new block after B
         
         // initialization of next's informations
-        next->size = currentsize - ((size  + SIZE_BLOCK_HEADER)) ;
+        next->size = currentsize - ((size)) ;
         next->alloc = 0 ;
     }
     return ;
