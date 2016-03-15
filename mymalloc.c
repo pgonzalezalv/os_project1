@@ -158,7 +158,7 @@ void *findBlock(size_t size)
  * This function split a block into two pieces if the size of
  * this block is bigger than necessary.
  */
-void splitBlock(block_header B, size_t size)
+void splitBlock(block_header *B, size_t size)
 {
     if (B->size > (size + SIZE_BLOCK_HEADER))
     {
