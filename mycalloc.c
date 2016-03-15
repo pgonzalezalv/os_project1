@@ -1,3 +1,9 @@
+/*
+ * Authors  : Pablo Gonzalez Alvarez (5243-13-00)
+ *            Doriane Olewicki (3964-14-00)
+ * due date : 16.03.16
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -6,16 +12,23 @@
 
 #include "test.h"
 #include "mymalloc.h"
+#include "mycalloc.h"
 
+/*
+ * FUNCTION MYCALLOC
+ * 
+ * This function allocates "size" bytes and initializes them
+ * to 0. Then, it returns a pointer to the allocated memory.
+ */
 void *mycalloc(size_t size)
 {
-    size_t *founded = (size_t*) malloc(size) ;
+    size_t *founded = (size_t*) malloc(size) ; // malloc call
     if (founded)
     {
         size_t i ;
-        for (i=0; i<size; i++)
+        for (i=0; i<size; i++) // go through the all allocated memory
         {
-            founded[i * 2] = 0 ;
+            founded[i] = 0x0 ; // initialization to 0
         }
     }
     return(founded) ;
