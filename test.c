@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "$(HOME)/local/include/CUnit/Cunit.h"
+#include "/home/tux/local/include/CUnit/Basic.h"
+#include "/home/tux/local/include/CUnit/CUnit.h"
 
 #include "header.h"
 
