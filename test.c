@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "/home/tux/local/include/CUnit/Basic.h"
-#include "/home/tux/local/include/CUnit/CUnit.h"
+#include "../local/include/CUnit/Basic.h"
+#include "../local/include/CUnit/CUnit.h"
 
 #include "header.h"
 
@@ -77,6 +77,7 @@ void test_mycalloc(void)
 
 int main(int argc, char *argv[])
 {
+    SIZE_INIT = (size_t) atoi (argv[1]) ;
     CU_pSuite pSuite = NULL;
     
     if(CUE_SUCCESS != CU_initialize_registry())
@@ -90,8 +91,8 @@ int main(int argc, char *argv[])
         return CU_get_error();
     }
     
-    if(NULL == CU_add_test(pSuite, "test_calloc2_1", test_mymalloc_1)
-       ) {
+    if(NULL == CU_add_test(pSuite, "test_calloc2_1", test_mymalloc_1))
+    {
         CU_cleanup_registry();
         return CU_get_error();
     }

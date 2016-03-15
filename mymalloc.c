@@ -35,7 +35,8 @@ void *mymalloc(size_t size)
     else /* 1st mymalloc call*/
     {
         head = (block_header) sbrk(0) ; //create the head
-        if (sbrk(SIZE_INIT + SIZE_BLOCK_HEADER) == (void*)-1) // verification if the allocation is possible (enough place)
+        tail = sbrk(SIZE_INIT + SIZE_BLOCK_HEADER) ;
+        if (tail == (void*)-1) // verification if the allocation is possible (enough place)
         {
             return NULL ;
         }
@@ -84,7 +85,8 @@ void *findBlock(size_t size)
     block_header current = head ; // initialization of the search
     block_header bestFit ; // block that will be returned
     
-    while (current) // while we are in the allocable zone in the heap
+    size_t i ;
+    for (i = head; i<tail; i++) // while we are in the allocable zone in the heap !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         if ((current->size >= (size + SIZE_BLOCK_HEADER) && current->alloc==0) && (current->size < bestFit->size))
         {
