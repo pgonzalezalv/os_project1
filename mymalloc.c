@@ -120,7 +120,6 @@ void *findBlock(size_t size)
         {
             bestSize = unAlloc_size ;
             bestFit = current ;
-            bestFit->size = unAlloc_size ; //done
         }
         if (unAlloc_size < size && !atLimit)
         {
@@ -131,7 +130,7 @@ void *findBlock(size_t size)
     {
         bestFit->size = bestSize ;
         bestFit->alloc = 1 ;
-        printf("bestFit de taille %ld puis %ld \n", bestFit, bestFit + SIZE_BLOCK_HEADER) ;
+        printf("bestFit de taille %ld puis %ld \n", bestFit, (void*)bestFit + SIZE_BLOCK_HEADER) ;
         return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
     }
     return NULL ;
