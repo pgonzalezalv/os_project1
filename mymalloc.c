@@ -131,6 +131,7 @@ void *findBlock(size_t size)
     {
         bestFit->size = bestSize ;
         bestFit->alloc = 1 ;
+        printf("bestFit de taille %ld puis %ld \n", bestFit, bestFit + SIZE_BLOCK_HEADER) ;
         return ((size_t)bestFit + SIZE_BLOCK_HEADER) ;
     }
     return NULL ;
