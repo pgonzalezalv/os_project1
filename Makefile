@@ -5,16 +5,16 @@ PATH2=$(HOME)/local/lib
 
 all:hello
 
-mymalloc.o: mymalloc.c mymalloc.h
+mymalloc.o: mymalloc.c header.h
 	$(CC) -c mymalloc.c
 
-myfree.o: myfree.c myfree.h mymalloc.h
+myfree.o: myfree.c header.h
 	$(CC) -c myfree.c
 
-mycalloc.o: mycalloc.c mycalloc.h mymalloc.h
+mycalloc.o: mycalloc.c header.h
 	$(CC) -c mycalloc.c
 
-test.o: test.c mymalloc.h myfree.h mycalloc.h
+test.o: test.c header.h
 	$(CC) -I$(PATH1) -L$(PATH2) -lcunit -c test.c
 
 hello: test.o mymalloc.o myfree.o mycalloc.o
