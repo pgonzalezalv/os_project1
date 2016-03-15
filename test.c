@@ -34,7 +34,7 @@ void test_mymalloc_1(void)
 void test_mymalloc_2(void)
 {
     void *ptr = mymalloc((size_t) 32) ;
-    block_header *b = (block_header*) (ptr - SIZE_BLOCK_HEADER) ;
+    block_header *b = (block_header*) ((size_t)ptr - SIZE_BLOCK_HEADER) ;
 
     if ((b)->size != 32)
     {
