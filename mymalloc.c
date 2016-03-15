@@ -49,8 +49,7 @@ void *mymalloc(size_t size)
         // initialization of head's informations
         head->size = SIZE_INIT ;
         head->alloc = 0 ;
-        tail = (block_header *) head + (SIZE_INIT + SIZE_BLOCK_HEADER) ;
-        lastBlock = head ;
+        tail = head + (SIZE_INIT + SIZE_BLOCK_HEADER) ;
         
         return mymalloc(size) ; // recursive call
     }
@@ -89,6 +88,41 @@ size_t round4(size_t num)
  */
 void *findBlock(size_t size)
 {
+    if (size == 0)
+    {
+        return NULL ;
+    }
+    
+    block_header *current = head ;
+    block_header *bestFit = NULL ;
+    int bestSize = SIZE_INIT + 1 ;
+    int currentSize = 0 ;
+    
+    while(current<tail)
+    {
+        currentSize = 0 ;
+        while ((current + currentSize < tail) && ((current + currentSize)->alloc==0))
+        {
+            currentSize += (current + currentSize)->size + SIZE_BLOCK_HEADER ;
+        }
+        
+        current->size = currentSize ;
+        
+        if (currentSize >= size && currentSize < bestSize)
+        {
+            bestFit->size = currentSize ;
+        }
+            
+    }
+    if (bestFit == NULL)
+    {
+        return NULL ;
+    }
+    bestFit->alloc = 1 ;
+    return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
+
+    
+               /*
     block_header *current = head ; // initialization of the search
     block_header *bestFit = NULL ; // block that will be returned
     int bestSize = SIZE_INIT + 1 ;
@@ -100,7 +134,7 @@ void *findBlock(size_t size)
         
         unAlloc_size = 0 ;
         
-        while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size<=size)
+        while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size!=size)
         {
             unAlloc_size += ((int)(current + unAlloc_size)->size) + SIZE_BLOCK_HEADER ;
             printf("ENTER HERE : %d \n", unAlloc_size) ;
@@ -109,6 +143,17 @@ void *findBlock(size_t size)
         if (current == lastBlock || current + unAlloc_size)
         {
             atLimit = 1 ;
+            if (bestSize == SIZE_INIT + 1)
+            {
+                if (ptr+size > lastBlock)
+                {
+                    return NULL ;
+                }
+                if (lastBlock->alloc==0)
+                {
+                    
+                }
+            }
         }
         
         if (unAlloc_size == size)
@@ -137,6 +182,7 @@ void *findBlock(size_t size)
         return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
     }
     return NULL ;
+     */
 }
 
 /*

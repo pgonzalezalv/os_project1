@@ -13,7 +13,7 @@ struct block_header { /*structure representing the head*/
 /* GLOBAL VARIABLES */
 static block_header *head;
 static block_header *tail ;
-static block_header *lastBlock ;
+
 static int initialized;
 static int initSize;
 static size_t SIZE_INIT ;
