@@ -35,7 +35,7 @@ void test_mymalloc_2(void)
 {
     void *ptr = mymalloc((size_t) 32) ;
     printf("%ld \n", ptr) ;
-    block_header *b = (block_header)(ptr - SIZE_BLOCK_HEADER) ;
+    block_header *b = (block_header*)(ptr - SIZE_BLOCK_HEADER) ;
     printf("%ld \n", b) ;
     
     size_t size = b->size ;
