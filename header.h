@@ -1,7 +1,3 @@
-/* MACROS */
-#define SIZE_BLOCK_HEADER size(struct block_header) // in BYTES
-//#define SIZE_INIT 512
-
 /* STRUCTURES*/
 typedef struct block_header block_header; /* by default a pointer */
 struct block_header { /*structure representing the head*/
@@ -9,6 +5,10 @@ struct block_header { /*structure representing the head*/
     zero : 2,
     alloc : 1; /* boolean : 0 if free bloc, 1 if allocated bloc*/
 };
+
+/* MACROS */
+#define SIZE_BLOCK_HEADER size(struct block_header) // in BYTES
+//#define SIZE_INIT 512
 
 /* GLOBAL VARIABLES */
 static block_header *head;
