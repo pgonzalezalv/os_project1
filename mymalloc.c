@@ -95,7 +95,7 @@ void *findBlock(size_t size)
     }
     
     block_header *current = head ;
-    void* ptrCurrent = (void*) head ;
+    void* ptr = (void*) head ;
     
     while(current<tail && (current->alloc==1 && current->size < size))
     {
