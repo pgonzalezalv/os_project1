@@ -32,7 +32,7 @@ void test_mymalloc_1(void)
 
 void test_mymalloc_2(void)
 {
-    block_header *ptr = (block_header) mymalloc((size_t) 32) ;
+    block_header ptr = (block_header) mymalloc((size_t) 32) ;
 
     if (ptr->size != 32)
     {
@@ -42,7 +42,7 @@ void test_mymalloc_2(void)
 
 void test_mymalloc_3(void)
 {
-    block_header *ptr = (block_header) mymalloc((size_t) 31) ;
+    block_header ptr = (block_header) mymalloc((size_t) 31) ;
   
     if (ptr->size != 32)
     {
@@ -63,11 +63,11 @@ void test_myfree(void)
 
 void test_mycalloc(void)
 {
-    block_header *ptr = (block_header) mycalloc((size_t) 32) ;
+    block_header ptr = (block_header) mycalloc((size_t) 32) ;
     size_t i ;
     for (i=0; i<ptr->size; i++)
     {
-        if (ptr[i * 2] != NULL)
+        if (&ptr[i*2] != NULL)
         {
             CU_FAIL("Error : pointed zone hasn't been initialized to 0 correctly. mymalloc failed.") ;
         }
