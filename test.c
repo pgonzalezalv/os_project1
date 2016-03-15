@@ -27,6 +27,7 @@ void test_mymalloc_1(void)
     {
         CU_FAIL("Error : pointer hasn't been assigned. mymalloc failed.") ;
     }
+    free(ptr) ;
 }
 
 
@@ -38,6 +39,7 @@ void test_mymalloc_2(void)
     {
         CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
     }
+    free(ptr) ;
 }
 
 void test_mymalloc_3(void)
@@ -48,6 +50,7 @@ void test_mymalloc_3(void)
     {
         CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
     }
+    free(ptr) ;
 }
 
 void test_myfree(void)
@@ -72,6 +75,7 @@ void test_mycalloc(void)
             CU_FAIL("Error : pointed zone hasn't been initialized to 0 correctly. mymalloc failed.") ;
         }
     }
+    myfree(ptr) ;
     return ;
 }
 
@@ -91,7 +95,13 @@ int main(int argc, char *argv[])
         return CU_get_error();
     }
     
-    if(NULL == CU_add_test(pSuite, "test_calloc2_1", test_mymalloc_1))
+    if(NULL == CU_add_test(pSuite, "test_mymalloc_1", test_mymalloc_1) ||
+       NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) ||
+       NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
+       NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
+       NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
+       )
+        
     {
         CU_cleanup_registry();
         return CU_get_error();
