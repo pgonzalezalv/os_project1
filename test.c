@@ -104,11 +104,17 @@ int main(int argc, char *argv[])
 */
 int main(int argc, char *argv[])
 {
+    SIZE_INIT = 512 ;
+    
     printf("Test please work \n") ;
     void* ptr_test1 = mymalloc((size_t) 32) ;
     if (ptr_test1 == NULL)
     {
         printf("ERREUR : mymalloc ne fonctionne pas") ;
+    }
+    else
+    {
+        printf("Work") ;
     }
     myfree(ptr_test1) ;
 }
