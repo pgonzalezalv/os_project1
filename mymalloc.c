@@ -91,7 +91,7 @@ void *findBlock(size_t size)
 {
     block_header *current = head ; // initialization of the search
     block_header *bestFit = NULL ; // block that will be returned
-    size_t bestSize = SIZE_INIT + 1 ;
+    int bestSize = SIZE_INIT + 1 ;
     int unAlloc_size = 0 ;
     int atLimit = 0 ; //boolean
     
@@ -103,6 +103,7 @@ void *findBlock(size_t size)
         while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size<=size)
         {
             unAlloc_size += ((int)(current + unAlloc_size)->size) + SIZE_BLOCK_HEADER ;
+            printf("ENTER HERE : %d \n", unAlloc_size) ;
         }
         
         if (current == lastBlock || current + unAlloc_size)
@@ -120,6 +121,7 @@ void *findBlock(size_t size)
         {
             bestSize = unAlloc_size ;
             bestFit = current ;
+            printf("bestSize = %d\n", bestSize) ;
         }
         if (unAlloc_size < size && !atLimit)
         {
@@ -128,7 +130,8 @@ void *findBlock(size_t size)
     }
     if(bestFit)
     {
-        bestFit->size = bestSize ;
+        bestFit->size = (size_t)bestSize ;
+        printf("bestSize = %d\n", bestSize) ;
         bestFit->alloc = 1 ;
         printf("bestFit de taille %ld puis %ld \n", bestFit, (void*)bestFit + SIZE_BLOCK_HEADER) ;
         return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
