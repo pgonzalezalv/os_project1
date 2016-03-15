@@ -120,7 +120,7 @@ void *findBlock(size_t size)
         {
             bestSize = unAlloc_size ;
             bestFit = current ;
-            bestFit->size = unAlloc_size ;
+            bestFit->size = unAlloc_size ; //done 
         }
         if (unAlloc_size < size && !atLimit)
         {
