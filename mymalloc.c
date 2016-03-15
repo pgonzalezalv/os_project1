@@ -82,17 +82,17 @@ size_t round4(size_t num)
  */
 void *findBlock(size_t size)
 {
-    block_header current = head ; // initialization of the search
+    block_header current ; // initialization of the search
     block_header bestFit ; // block that will be returned
     
     size_t i ;
-    for (i = (size_t)head; i<(size_t)tail; i++) // while we are in the allocable zone in the heap !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    for (i = (size_t)head; i<(size_t)tail; i+=(current->size + SIZE_BLOCK_HEADER)) // while we are in the allocable zone in the heap !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        current = (block_header) i ;
     {
         if ((current->size >= (size + SIZE_BLOCK_HEADER) && current->alloc==0) && (current->size < bestFit->size))
         {
             bestFit = current ;
         }
-        current += (current->size) ; // add a step
     }
     
     if (bestFit) // allocate the bestFit if it existe

@@ -19,7 +19,7 @@
  */
 void myfree(void *ptr)
 {
-    block_header B = (block_header) ptr ;
+    block_header B = (block_header) (ptr - SIZE_BLOCK_HEADER) ;
     B->alloc = 0 ;
 }
 
