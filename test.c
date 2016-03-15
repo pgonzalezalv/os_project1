@@ -38,7 +38,9 @@ void test_mymalloc_2(void)
     block_header *b = (ptr - SIZE_BLOCK_HEADER) ;
     
     size_t size = b->size ;
+    printf("%ld \n", size) ;
     int alloc = b->alloc ;
+    printf("%d \n", alloc) ;
     CU_ASSERT_EQUAL(size, 32) ;
     CU_ASSERT_EQUAL(alloc, 1) ;
     //if ((b)->size != 32)
