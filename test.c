@@ -33,9 +33,10 @@ void test_mymalloc_1(void)
 
 void test_mymalloc_2(void)
 {
-    block_header *ptr = (block_header*) mymalloc((size_t) 32) ;
+    void *ptr = mymalloc((size_t) 32) ;
+    block_header *b = (block_header*) (ptr - SIZE_BLOCK_HEADER) ;
 
-    if (ptr->size != 32)
+    if ((b)->size != 32)
     {
         CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
     }
