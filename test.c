@@ -28,14 +28,13 @@ void test_mymalloc_1(void)
     //{
     //    CU_FAIL("Error : pointer hasn't been assigned. mymalloc failed.") ;
     //}
-    //free(ptr) ;
 }
 
 
 void test_mymalloc_2(void)
 {
     block_header *ptr = (block_header*) mymalloc((size_t) 32) ;
-    block_header *b = (ptr - SIZE_BLOCK_HEADER) ;
+    block_header *b = (ptr) ; // - SIZE_BLOCK_HEADER) ;
     
     size_t size = b->size ;
     printf("%ld \n", size) ;
@@ -47,7 +46,6 @@ void test_mymalloc_2(void)
     //{
     //    CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
     //}
-    //free(ptr) ;
 }
 
 void test_mymalloc_3(void)
