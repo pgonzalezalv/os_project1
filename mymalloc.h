@@ -6,7 +6,7 @@
 #define SIZE_INIT 512
 
 /* GLOBAL VARIABLES */
-extern block_header head;
+block_header head;
 
 /* FUNCTIONS SIGNATURES */
 void *mymalloc(size_t size) ;
