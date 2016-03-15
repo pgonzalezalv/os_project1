@@ -39,7 +39,7 @@ void *mymalloc(size_t size)
     }
     else /* 1st mymalloc call*/
     {
-        head = (block_header *) sbrk(0) ; //create the head
+        head = (block_header *) sbrk(SIZE_BLOCK_HEADER) ; //create the head
         void *err = sbrk(SIZE_INIT + SIZE_BLOCK_HEADER) ;
         if (err == (void*)-1) // verification if the allocation is possible (enough place)
         {
@@ -120,7 +120,7 @@ void *findBlock(size_t size)
         {
             bestSize = unAlloc_size ;
             bestFit = current ;
-            bestFit->size = unAlloc_size ; //done 
+            bestFit->size = unAlloc_size ; //done
         }
         if (unAlloc_size < size && !atLimit)
         {
