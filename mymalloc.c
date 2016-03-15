@@ -86,7 +86,7 @@ void *findBlock(size_t size)
     block_header bestFit ; // block that will be returned
     
     size_t i ;
-    for (i = head; i<tail; i++) // while we are in the allocable zone in the heap !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    for (i = (size_t)head; i<(size_t)tail; i++) // while we are in the allocable zone in the heap !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
         if ((current->size >= (size + SIZE_BLOCK_HEADER) && current->alloc==0) && (current->size < bestFit->size))
         {
