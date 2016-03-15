@@ -1,5 +1,5 @@
 /* MACROS */
-#define SIZE_BLOCK_HEADER 4 // in BYTES
+#define SIZE_BLOCK_HEADER size(struct block_header) // in BYTES
 //#define SIZE_INIT 512
 
 /* STRUCTURES*/
