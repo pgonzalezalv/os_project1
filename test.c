@@ -77,7 +77,7 @@ void test_mycalloc(void)
 
 int main(int argc, char *argv[])
 {
-    //SIZE_INIT = (size_t) atoi (argv[1]) ;
+    SIZE_INIT = (size_t) atoi (argv[1]) ;
     CU_pSuite pSuite = NULL;
     
     if(CUE_SUCCESS != CU_initialize_registry())
@@ -101,24 +101,7 @@ int main(int argc, char *argv[])
     CU_cleanup_registry();
     return CU_get_error();
 }
-/*
-int main(int argc, char *argv[])
-{
-    SIZE_INIT = 512 ;
-    
-    printf("Test please work \n") ;
-    void* ptr_test1 = mymalloc((size_t) 32) ;
-    if (ptr_test1 == NULL)
-    {
-        printf("ERREUR : mymalloc ne fonctionne pas") ;
-    }
-    else
-    {
-        printf("Work") ;
-    }
-    myfree(ptr_test1) ;
-}
- */
+
 
 
 
