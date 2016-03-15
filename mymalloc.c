@@ -25,6 +25,11 @@
  */
 void *mymalloc(size_t size)
 {
+    if (size == 0)
+    {
+        return NULL ;
+    }
+    
     if (head) /* nth mymalloc call*/
     {
         size_t sizeRounded = round4(size) ; // round the size
@@ -34,9 +39,9 @@ void *mymalloc(size_t size)
     }
     else /* 1st mymalloc call*/
     {
-        head = (block_header) sbrk(0) ; //create the head
-        tail = sbrk(SIZE_INIT + SIZE_BLOCK_HEADER) ;
-        if (tail == (void*)-1) // verification if the allocation is possible (enough place)
+        head = (block_header *) sbrk(0) ; //create the head
+        void *err = sbrk(SIZE_INIT + SIZE_BLOCK_HEADER) ;
+        if (err == (void*)-1) // verification if the allocation is possible (enough place)
         {
             return NULL ;
         }
@@ -44,6 +49,8 @@ void *mymalloc(size_t size)
         // initialization of head's informations
         head->size = SIZE_INIT ;
         head->alloc = 0 ;
+        tail = (block_header *) head + (SIZE_INIT + SIZE_BLOCK_HEADER) ;
+        lastBlock = head ;
         
         return mymalloc(size) ; // recursive call
     }
@@ -82,10 +89,52 @@ size_t round4(size_t num)
  */
 void *findBlock(size_t size)
 {
-    block_header current ; // initialization of the search
-    block_header bestFit ; // block that will be returned
+    block_header *current = head ; // initialization of the search
+    block_header *bestFit = NULL ; // block that will be returned
+    size_t bestSize = SIZE_INIT + 1 ;
+    size_t unAlloc_size = 0 ;
+    int atLimit = 0 ; //boolean
     
-    size_t i ;
+    while (!atLimit)
+    {
+        
+        unAlloc_size = 0 ;
+        
+        while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size<=size)
+        {
+            unAlloc_size += (current + unAlloc_size)->size + SIZE_BLOCK_HEADER ;
+        }
+        
+        if (current == last || current + unAlloc_size)
+        {
+            atLimit = 1 ;
+        }
+        
+        if (unAlloc_size == size)
+        {
+            bestFit->size = size ;
+            bestFit->alloc = 1 ;
+            return (bestFit) ;
+        }
+        if (unAlloc_size < bestSize)
+        {
+            bestSize = unAlloc_size ;
+            bestFit = current ;
+            best->size = unAlloc_size ;
+        }
+        if (unAlloc_size < size && !atLimit)
+        {
+            current += unAlloc_size + SIZE_BLOCK_HEADER + (current + unAlloc_size)->size ;
+        }
+    }
+    if(bestFit)
+    {
+        bestFit->alloc = 1 ;
+        return (*bestFit + SIZE_BLOCK_HEADER) ;
+    }
+    return NULL ;
+    
+    /*size_t i ;
     for (i = (size_t)head; i<(size_t)tail; i+=(current->size)) // while we are in the allocable zone in the heap !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         current = (block_header) i ;
     {
@@ -100,6 +149,7 @@ void *findBlock(size_t size)
     bestFit->alloc = 1 ;
     }
     return ((void*) bestFit) ;
+     */
 }
 
 /*
@@ -110,11 +160,11 @@ void *findBlock(size_t size)
  */
 void splitBlock(block_header B, size_t size)
 {
-    if (B->size > (size))
+    if (B->size > (size + SIZE_BLOCK_HEADER))
     {
         size_t currentsize = B->size ; // memory of the block's size
         B->size = size ; // change the size of B
-        block_header next = B + ((size)) ; // create a new block after B
+        block_header next = B + (size + SIZE_BLOCK_HEADER) ; // create a new block after B
         
         // initialization of next's informations
         next->size = currentsize - ((size)) ;

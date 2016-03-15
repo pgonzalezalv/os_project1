@@ -3,7 +3,7 @@
 //#define SIZE_INIT 512
 
 /* STRUCTURES*/
-typedef struct block_header *block_header; /* by default a pointer */
+typedef struct block_header block_header; /* by default a pointer */
 struct block_header { /*structure representing the head*/
     unsigned int size : 29, /* int : value up to 2^29*/
     zero : 2,
@@ -11,11 +11,12 @@ struct block_header { /*structure representing the head*/
 };
 
 /* GLOBAL VARIABLES */
-block_header head;
-void *tail ; 
-int initialized;
-int initSize;
-size_t SIZE_INIT ;
+static block_header *head;
+static block_header *tail ;
+static block_header *lastBlock ;
+static int initialized;
+static int initSize;
+static size_t SIZE_INIT ;
 
 
 /* FUNCTIONS SIGNATURES */
@@ -24,7 +25,7 @@ size_t SIZE_INIT ;
 void *mymalloc(size_t size) ;
 void *findBlock(size_t size) ;
 size_t round4(size_t num) ;
-void splitBlock(block_header B, size_t size) ;
+void splitBlock(block_header *B, size_t size) ;
 
 // in mycalloc.c
 void *mycalloc(size_t size) ;
