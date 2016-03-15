@@ -95,10 +95,23 @@ void *findBlock(size_t size)
     }
     
     block_header *current = head ;
-    block_header *bestFit = NULL ;
-    int bestSize = SIZE_INIT + 1 ;
-    int currentSize = 0 ;
+    void* ptrCurrent = (void*) head ;
     
+    while(current<tail && (current->alloc==1 && current->size < size))
+    {
+        ptr += current->size + SIZE_BLOCK_HEADER ;
+        current = (block_header *) ptr ;
+    }
+    if (current<tail)
+    {
+        current->alloc = 1 ;
+        return((void*)current + SIZE_BLOCK_HEADER) ;
+    }
+    else
+    {
+        return NULL ;
+    }
+    /*
     while(current<tail)
     {
         currentSize = 0 ;
@@ -128,7 +141,7 @@ void *findBlock(size_t size)
     }
     bestFit->alloc = 1 ;
     return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
-
+*/
     
                /*
     block_header *current = head ; // initialization of the search
