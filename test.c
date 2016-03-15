@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-/*
+
 int nb_times_malloc_used = 0;
 int let_malloc_fail = 0;
 
@@ -77,7 +77,7 @@ void test_mycalloc(void)
 
 int main(int argc, char *argv[])
 {
-    SIZE_INIT = (size_t) atoi (argv[1]) ;
+    //SIZE_INIT = (size_t) atoi (argv[1]) ;
     CU_pSuite pSuite = NULL;
     
     if(CUE_SUCCESS != CU_initialize_registry())
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
     CU_cleanup_registry();
     return CU_get_error();
 }
-*/
+/*
 int main(int argc, char *argv[])
 {
     SIZE_INIT = 512 ;
@@ -118,6 +118,7 @@ int main(int argc, char *argv[])
     }
     myfree(ptr_test1) ;
 }
+ */
 
 
 

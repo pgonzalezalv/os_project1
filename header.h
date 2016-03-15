@@ -1,6 +1,6 @@
 /* MACROS */
 #define SIZE_BLOCK_HEADER 4 // in BYTES
-//#define SIZE_INIT 512
+#define SIZE_INIT 512
 
 /* STRUCTURES*/
 typedef struct block_header block_header; /* by default a pointer */
@@ -16,7 +16,7 @@ static block_header *tail ;
 static block_header *lastBlock ;
 static int initialized;
 static int initSize;
-static size_t SIZE_INIT ;
+//static size_t SIZE_INIT ;
 
 
 /* FUNCTIONS SIGNATURES */
