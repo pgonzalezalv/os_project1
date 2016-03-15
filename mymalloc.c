@@ -129,6 +129,7 @@ void *findBlock(size_t size)
     }
     if(bestFit)
     {
+        bestFit->size = bestSize ;
         bestFit->alloc = 1 ;
         return ((size_t)bestFit + SIZE_BLOCK_HEADER) ;
     }
