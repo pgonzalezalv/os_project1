@@ -97,8 +97,7 @@ void *findBlock(size_t size)
     block_header *bestFit = NULL ;
     int bestSize = SIZE_INIT + 1 ;
     int currentSize = 0 ;
-    printf("un tour");
-
+    
     while(current<tail)
     {
         currentSize = 0 ;
@@ -115,6 +114,8 @@ void *findBlock(size_t size)
         }
         
         current += currentSize + (current + currentSize)->size ;
+        printf("un tour");
+
         if (current != tail)
         {
             current += SIZE_BLOCK_HEADER ;
