@@ -112,7 +112,12 @@ void *findBlock(size_t size)
         {
             bestFit->size = currentSize ;
         }
-        current += currentSize + SIZE_BLOCK_HEADER + (current + currentSize)->size ;
+        
+        current += currentSize + (current + currentSize)->size ;
+        if (current != tail)
+        {
+            current += SIZE_BLOCK_HEADER ;
+        }
     }
     if (bestFit == NULL)
     {
