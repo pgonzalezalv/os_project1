@@ -49,7 +49,7 @@ void *mymalloc(size_t size)
         // initialization of head's informations
         head->size = SIZE_INIT ;
         head->alloc = 0 ;
-        tail = head + (SIZE_INIT + SIZE_BLOCK_HEADER) ;
+        tail = head + (SIZE_INIT) ;
         
         return mymalloc(size) ; // recursive call
     }
