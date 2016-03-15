@@ -103,7 +103,7 @@ void *findBlock(size_t size)
         currentSize = 0 ;
         while ((current + currentSize < tail) && ((current + currentSize)->alloc==0))
         {
-            currentSize += (current + currentSize)->size + SIZE_BLOCK_HEADER ;
+            currentSize += ((current + currentSize)->size + (size_t)SIZE_BLOCK_HEADER)/4 ;
         }
         
         current->size = currentSize ;
