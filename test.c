@@ -21,10 +21,10 @@ int clean_suite1(void) {
 
 void test_mymalloc_1(void)
 {
-    printf("on arrive ici") ;
     void *ptr = mymalloc((size_t) 32) ;
     
     CU_ASSERT_PTR_NOT_EQUAL(ptr, NULL) ;
+    printf("on arrive ici") ;
     //if (ptr == NULL)
     //{
     //    CU_FAIL("Error : pointer hasn't been assigned. mymalloc failed.") ;
