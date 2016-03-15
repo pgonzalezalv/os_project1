@@ -105,7 +105,7 @@ void *findBlock(size_t size)
             unAlloc_size += (current + unAlloc_size)->size + SIZE_BLOCK_HEADER ;
         }
         
-        if (current == last || current + unAlloc_size)
+        if (current == lastBlock || current + unAlloc_size)
         {
             atLimit = 1 ;
         }
@@ -120,7 +120,7 @@ void *findBlock(size_t size)
         {
             bestSize = unAlloc_size ;
             bestFit = current ;
-            best->size = unAlloc_size ;
+            bestFit->size = unAlloc_size ;
         }
         if (unAlloc_size < size && !atLimit)
         {
@@ -130,7 +130,7 @@ void *findBlock(size_t size)
     if(bestFit)
     {
         bestFit->alloc = 1 ;
-        return (*bestFit + SIZE_BLOCK_HEADER) ;
+        return ((size_t)bestFit + SIZE_BLOCK_HEADER) ;
     }
     return NULL ;
     
@@ -164,7 +164,7 @@ void splitBlock(block_header *B, size_t size)
     {
         size_t currentsize = B->size ; // memory of the block's size
         B->size = size ; // change the size of B
-        block_header next = B + (size + SIZE_BLOCK_HEADER) ; // create a new block after B
+        block_header *next = B + (size + SIZE_BLOCK_HEADER) ; // create a new block after B
         
         // initialization of next's informations
         next->size = currentsize - ((size)) ;
