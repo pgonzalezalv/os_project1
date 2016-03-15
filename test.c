@@ -28,7 +28,7 @@ void test_mymalloc_1(void)
     //{
     //    CU_FAIL("Error : pointer hasn't been assigned. mymalloc failed.") ;
     //}
-    free(ptr) ;
+    //free(ptr) ;
 }
 
 
@@ -45,7 +45,7 @@ void test_mymalloc_2(void)
     //{
     //    CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
     //}
-    free(ptr) ;
+    //free(ptr) ;
 }
 
 void test_mymalloc_3(void)
