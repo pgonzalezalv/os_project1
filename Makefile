@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-W -Wall
-PATH1=$(HOME)/local/include
-PATH2=$(HOME)/local/lib
+PATH1=/home/tux/local/include/
+PATH2=/home/tux/local/lib/
 
 all:hello
 
