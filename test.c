@@ -37,7 +37,9 @@ void test_mymalloc_2(void)
     printf("%ld \n", ptr) ;
     block_header *b = (((size_t)ptr) - SIZE_BLOCK_HEADER * 8) ;
     printf("%ld \n", b) ;
-    
+    size_t a = 1 ;
+    b = b + a ;
+    printf("iciiiiiii  %ld \n", b) ; 
     size_t size = b->size ;
     printf("%ld \n", size) ;
     int alloc = b->alloc ;
