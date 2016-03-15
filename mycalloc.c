@@ -10,9 +10,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include "test.h"
-#include "mymalloc.h"
-#include "mycalloc.h"
+#include "header.h"
 
 /*
  * FUNCTION MYCALLOC

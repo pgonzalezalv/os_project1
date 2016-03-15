@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "test.h"
+#include "header.h"
 
 /*
  * FUNCTION MYFREE 

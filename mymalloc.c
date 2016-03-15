@@ -12,8 +12,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include "test.h"
-#include "mymalloc.h"
+#include "header.h"
 
 /* FUNCTION MYMALLOC
  *

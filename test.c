@@ -4,8 +4,7 @@
 #include <unistd.h>
 #include "$(HOME)/local/include/CUnit/Cunit.h"
 
-#include "test.h"
-#include "mymalloc.h"
+#include "header.h"
 
 
 int nb_times_malloc_used = 0;
