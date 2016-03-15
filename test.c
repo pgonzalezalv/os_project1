@@ -104,7 +104,13 @@ int main(int argc, char *argv[])
 */
 int main(int argc, char *argv[])
 {
-    printf("Test please work") ; 
+    printf("Test please work \n") ;
+    void* ptr_test1 = mymalloc((size_t) 32) ;
+    if (ptr_test1 == NULL)
+    {
+        printf("ERREUR : mymalloc ne fonctionne pas") ;
+    }
+    myfree(ptr_test1) ;
 }
 
 
