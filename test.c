@@ -22,24 +22,29 @@ int clean_suite1(void) {
 void test_mymalloc_1(void)
 {
     void *ptr = mymalloc((size_t) 32) ;
- 
-    if (ptr == NULL)
-    {
-        CU_FAIL("Error : pointer hasn't been assigned. mymalloc failed.") ;
-    }
+    
+    CU_ASSERT_PTR_NOT_EQUAL(ptr, NULL) ;
+    //if (ptr == NULL)
+    //{
+    //    CU_FAIL("Error : pointer hasn't been assigned. mymalloc failed.") ;
+    //}
     free(ptr) ;
 }
 
 
 void test_mymalloc_2(void)
 {
-    void *ptr = mymalloc((size_t) 32) ;
-    block_header *b = (block_header*) ((size_t)ptr - SIZE_BLOCK_HEADER) ;
-
-    if ((b)->size != 32)
-    {
-        CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
-    }
+    block_header *ptr = (block_header*) mymalloc((size_t) 32) ;
+    block_header *b = (ptr - SIZE_BLOCK_HEADER) ;
+    
+    size_t size = b->size ;
+    int alloc = b->alloc ;
+    CU_ASSERT_EQUAL(size, 32) ;
+    CU_ASSERT_EQUAL(alloc, 1) ;
+    //if ((b)->size != 32)
+    //{
+    //    CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
+    //}
     free(ptr) ;
 }
 
