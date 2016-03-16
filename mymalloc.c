@@ -156,25 +156,21 @@ void *findBlock(size_t size)
     while (!atLimit)
     {
         
-        printf("ETAPE 1 \n");
         unAlloc_size = 0 ;
         
         while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size != size)
         {
             unAlloc_size += (current + unAlloc_size)->size + SIZE_BLOCK_HEADER ;
         }
-        printf("ETAPE 2 \n");
         if (current == lastBlock || current + unAlloc_size == lastBlock)
         {
             atLimit = 1 ; // to be looked to
         }
-        printf("ETAPE 3 \n");
         if (unAlloc_size == size)
         {
             current->size = size ;
             current->alloc = 1 ;
             return (current) ;
-            printf("ETAPE 4 \n");
         }
         else if (unAlloc_size > size && unAlloc_size < bestSize)
         {
@@ -182,19 +178,16 @@ void *findBlock(size_t size)
             bestSize = unAlloc_size ;
             bestFit = current ;
             current += current->size ;
-            printf("bestSize = %d\n", bestSize) ;
-            printf("ETAPE 5 \n");
         }
         else if (unAlloc_size < size && !atLimit)
         {
             current += unAlloc_size + SIZE_BLOCK_HEADER + (current + unAlloc_size)->size ;
-            printf("ETAPE 6 \n");
         }
     }
-    printf("ETAPE 7 \n");
     if(goodSize == 0)
     {
         printf("ETAPE 7.1 \n");
+        printf("current = %ld ; size = %ld ; current + size = %ld ; tail = %ld \n",current, size, current + size, tail);
         if ((void*)(current + size) > (void*)tail)
         {
             printf("ETAPE 7.2 \n");
