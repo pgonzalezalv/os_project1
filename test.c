@@ -21,35 +21,28 @@ int clean_suite1(void) {
 
 void test_mymalloc_1(void)
 {
-    void *ptr = mymalloc((size_t) 32) ;
+    void *ptr1 = mymalloc((size_t) 32) ;
     
-    CU_ASSERT_PTR_NOT_EQUAL(ptr, NULL) ;
+    CU_ASSERT_PTR_NOT_EQUAL(ptr1, NULL) ;
 }
 
 
 void test_mymalloc_2(void)
 {
-    void *ptr = mymalloc((size_t) 32) ;
-    printf("%ld \n", ptr) ;
-    block_header *b = (block_header*)(ptr - SIZE_BLOCK_HEADER) ;
-    printf("%ld \n", b) ;
+    void *ptr2 = mymalloc((size_t) 32) ;
+    block_header *b = (block_header*)(ptr2 - SIZE_BLOCK_HEADER) ;
     
     unsigned int size = b->size ;
-    printf("%ld \n", size) ;
     int alloc = b->alloc ;
-    printf("%d \n", alloc) ;
-    CU_ASSERT_EQUAL(size, 32) ;
+    CU_ASSERT_EQUAL(size, 32 + SIZE_BLOCK_HEADER) ;
     CU_ASSERT_EQUAL(alloc, 1) ;
 }
 
 void test_mymalloc_3(void)
 {
-    block_header *ptr = (block_header*) mymalloc((size_t) 31) ;
+    block_header *ptr3 = (block_header*) mymalloc((size_t) 31) ;
   
-    if (ptr->size != 32)
-    {
-        CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
-    }
+    CU_ASSERT_NOT_EQUAL(ptr3, 32 + SIZE_BLOCK_HEADER) ;
 }
 
 void test_myfree(void)

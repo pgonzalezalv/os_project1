@@ -88,63 +88,6 @@ size_t round4(size_t num)
  */
 void *findBlock(size_t size)
 {
-    /*
-    if (size == 0)
-    {
-        return NULL ;
-    }
-    
-    block_header *current = head ;
-    void* ptr = (void*) head ;
-    
-    while(current<tail && (current->alloc=1 && current->size < size))
-    {
-        ptr += current->size + SIZE_BLOCK_HEADER ;
-        current = (block_header *) ptr ;
-    }
-    if (current<tail)
-    {
-        current->alloc = 1 ;
-        return((void*)current + SIZE_BLOCK_HEADER) ;
-    }
-    else
-    {
-        return NULL ;
-    }
-     */
-    /*
-    while(current<tail)
-    {
-        currentSize = 0 ;
-        while ((current + currentSize < tail) && ((current + currentSize)->alloc==0))
-        {
-            currentSize += ((current + currentSize)->size + (size_t)SIZE_BLOCK_HEADER)/4 ;
-        }
-        
-        current->size = currentSize ;
-        
-        if (currentSize >= size && currentSize < bestSize)
-        {
-            bestFit->size = currentSize ;
-        }
-        
-        current += currentSize + (current + currentSize)->size ;
-        printf("un tour");
-
-        if (current != tail)
-        {
-            current += SIZE_BLOCK_HEADER ;
-        }
-    }
-    if (bestFit == NULL)
-    {
-        return NULL ;
-    }
-    bestFit->alloc = 1 ;
-    return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
-*/
-    
-    
     block_header *current = head ; // initialization of the search
     block_header *bestFit = NULL ; // block that will be returned
     int bestSize = SIZE_INIT + 1; // size of the memory zone the closest to the size asked
