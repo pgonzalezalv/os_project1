@@ -11,11 +11,11 @@
 int nb_times_malloc_used = 0;
 int let_malloc_fail = 0;
 
-int init_suite1(void) {
+int initSuite(void) {
     return 0;
 }
 
-int clean_suite1(void) {
+int cleanSuite(void) {
     return 0;
 }
 
@@ -47,8 +47,8 @@ void test_mymalloc_3(void)
 
 void test_myfree(void)
 {
-    void *ptr = mymalloc((size_t) 32) ;
-    myfree(ptr) ;
+    void *ptr4 = mymalloc((size_t) 32) ;
+    myfree(ptr4) ;
     
     if (ptr != NULL)
     {
@@ -58,16 +58,16 @@ void test_myfree(void)
 
 void test_mycalloc(void)
 {
-    block_header *ptr = (block_header*) mycalloc((size_t) 32) ;
+    block_header *ptr5 = (block_header*) mycalloc((size_t) 32) ;
     size_t i ;
     for (i=0; i<ptr->size; i++)
     {
-        if (&ptr[i*2] != NULL)
+        if (&ptr5[i*2] != NULL)
         {
             CU_FAIL("Error : pointed zone hasn't been initialized to 0 correctly. mymalloc failed.") ;
         }
     }
-    myfree(ptr) ;
+    myfree(ptr5) ;
     return ;
 }
 
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
         return CU_get_error();
     }
     
-    pSuite = CU_add_suite("Suite de tests pour calloc2", init_suite1, clean_suite1);
+    pSuite = CU_add_suite("Suite de tests pour mymalloc, mycalloc et myFree", initSuite, cleanSuite);
     if(NULL == pSuite) {
         CU_cleanup_registry();
         return CU_get_error();
@@ -89,9 +89,9 @@ int main(int argc, char *argv[])
     
     if(NULL == CU_add_test(pSuite, "test_mymalloc_1", test_mymalloc_1) ||
        NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) ||
-       NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) //||
-       //NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
-       //NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
+       NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
+       NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
+       NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
        )
         
     {

@@ -122,27 +122,30 @@ void *findBlock(size_t size)
             bestFit = (block_header*)current ;
             current += current->size ;
         }
-        else if (unAlloc_size < size && !atLimit)
+        else if (unAlloc_size < size && !atLimit) // if the size is wrong but we can go further in the heap
         {
-            current += unAlloc_size + SIZE_BLOCK_HEADER + (current + unAlloc_size)->size ;
+            current += unAlloc_size + SIZE_BLOCK_HEADER + (current + unAlloc_size)->size ; // make a step
         }
     }
-    if(goodSize == 0)
+    if(goodSize == 0) // no size or bestFit have been given
     {
-        if ((void*)(current + size/4) > (void*)tail)
+        if ((void*)(current + size/4) > (void*)tail) // if we are at the end
         {
-            return NULL ;
+            return NULL ; // no place to stock the data
         }
         
-        size_t sizeLast = lastBlock->size ;
-        (current-SIZE_BLOCK_HEADER)->size = size ;
-        (current-SIZE_BLOCK_HEADER)->alloc = 1 ;
-        lastBlock = (block_header*)(current + size) ;
-        lastBlock->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
-        return (current) ;
+        if (lastBlock->alloc == 0) // if last block hasn't been allocated
+        {
+            size_t sizeLast = lastBlock->size ;
+            (current-SIZE_BLOCK_HEADER)->size = size ;
+            (current-SIZE_BLOCK_HEADER)->alloc = 1 ;
+            lastBlock = (block_header*)(current + size) ;
+            lastBlock->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
+            return (current) ;
+        }
+        return NULL ;
     }
-    
-    if(bestFit)
+    else
     {
         bestFit->size = (unsigned int)bestSize ;
         bestFit->alloc = 1 ;
@@ -165,7 +168,7 @@ void splitBlock(block_header *B, size_t size)
         size_t currentsize = B->size ; // memory of the block's size
         B->size = size ; // change the size of B
     
-        // initialization of next's informations
+        // initialization of next block's informations
         (B + size + SIZE_BLOCK_HEADER)->size = currentsize - ((size)) ;
         (B + size + SIZE_BLOCK_HEADER)->alloc = 0 ;
     }
