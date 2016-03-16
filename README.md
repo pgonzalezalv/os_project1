@@ -34,8 +34,11 @@ they contain :
 * `./mycalloc.c`
 * `./myfree.c`
 * `./mymalloc.c`
+* `./rapport.pdf`
+* `./README.md`
 * `./tests.c`
 
 #### Known Issues
 
-`./mymalloc.c` does not pass all the tests
+`./mymalloc.c` does not pass our `test_mymalloc_2` unit test. See document
+`./rapport.pdf`.
