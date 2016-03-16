@@ -172,11 +172,11 @@ void *findBlock(size_t size)
             current->alloc = 1 ;
             return (current + SIZE_BLOCK_HEADER) ;
         }
-        else if (unAlloc_size > size && unAlloc_size < bestSize) // if the size is big enougth but smaller than bestSize
+        else if (unAlloc_size > size && unAlloc_size < bestSize) // if the size is big enougth and smaller than bestSize
         {
             goodSize = 1 ;
             bestSize = unAlloc_size ;
-            bestFit = current ;
+            bestFit = (block_header*)current ;
             current += current->size ;
         }
         else if (unAlloc_size < size && !atLimit)
@@ -190,12 +190,13 @@ void *findBlock(size_t size)
         {
             return NULL ;
         }
+        
         size_t sizeLast = lastBlock->size ;
-        current->size = (unsigned int)size ;
-        current->alloc = 1 ;
-        lastBlock = (block_header*)(current + size + SIZE_BLOCK_HEADER) ;
+        (current-SIZE_BLOCK_HEADER)->size = (unsigned int)size ;
+        (current-SIZE_BLOCK_HEADER)->alloc = 1 ;
+        lastBlock = (block_header*)(current + size) ;
         lastBlock->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
-        return (current + SIZE_BLOCK_HEADER) ;
+        return (current) ;
     }
     
     if(bestFit)
