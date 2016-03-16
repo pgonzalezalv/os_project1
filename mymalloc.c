@@ -187,26 +187,20 @@ void *findBlock(size_t size)
     }
     if(goodSize == 0)
     {
-        printf("ETAPE 7.1 \n");
-        printf("current = %ld ; size = %ld ; current + size = %ld ; tail = %ld \n",current, size, current + size, tail);
         if ((void*)(current + size/4) > (void*)tail)
         {
-            printf("ETAPE 7.2 \n");
             return NULL ;
         }
-        printf("ETAPE 7.3 \n");
         size_t sizeLast = lastBlock->size ;
         current->size = size ;
         current->alloc = 1 ;
         lastBlock = (block_header*)(current + size + SIZE_BLOCK_HEADER) ;
         lastBlock->size = sizeLast - size + unAlloc_size ;
         return (current + SIZE_BLOCK_HEADER) ;
-        printf("ETAPE 8 \n");
     }
     
     if(bestFit)
     {
-        printf("ETAPE 9 \n");
         bestFit->size = (size_t)bestSize ;
         printf("bestSize = %d\n", bestSize) ;
         bestFit->alloc = 1 ;
