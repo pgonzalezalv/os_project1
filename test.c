@@ -59,10 +59,10 @@ void test_myfree(void)
 void test_mycalloc(void)
 {
     block_header *ptr5 = (block_header*) mycalloc((size_t) 32) ;
-    size_t i ;
-    for (i=0; i<ptr->size; i++)
+    int i ;
+    for (i=0; i<ptr5->size; i++)
     {
-        if (&ptr5[i*2] != NULL)
+        if (&ptr5[i] != 1)
         {
             CU_FAIL("Error : pointed zone hasn't been initialized to 0 correctly. mymalloc failed.") ;
         }
