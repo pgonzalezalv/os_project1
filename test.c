@@ -24,10 +24,6 @@ void test_mymalloc_1(void)
     void *ptr = mymalloc((size_t) 32) ;
     
     CU_ASSERT_PTR_NOT_EQUAL(ptr, NULL) ;
-    //if (ptr == NULL)
-    //{
-    //    CU_FAIL("Error : pointer hasn't been assigned. mymalloc failed.") ;
-    //}
 }
 
 
@@ -44,10 +40,6 @@ void test_mymalloc_2(void)
     printf("%d \n", alloc) ;
     CU_ASSERT_EQUAL(size, 32) ;
     CU_ASSERT_EQUAL(alloc, 1) ;
-    //if ((b)->size != 32)
-    //{
-    //    CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
-    //}
 }
 
 void test_mymalloc_3(void)
@@ -104,10 +96,10 @@ int main(int argc, char *argv[])
     }
     
     if(NULL == CU_add_test(pSuite, "test_mymalloc_1", test_mymalloc_1) ||
-       NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) ||
-       NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
-       NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
-       NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
+       NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) //||
+       //NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
+       //NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
+       //NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
        )
         
     {

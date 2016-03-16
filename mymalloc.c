@@ -147,32 +147,32 @@ void *findBlock(size_t size)
     
     block_header *current = head ; // initialization of the search
     block_header *bestFit = NULL ; // block that will be returned
-    int bestSize = 0 ;
+    int bestSize = SIZE_INIT + 1; // size of the memory zone the closest to the size asked
     int goodSize = 0 ; //boolean : is it the good size ?
     
     size_t unAlloc_size = 0 ;
     int atLimit = 0 ; //boolean : are we at the limit of the heap ?
     
-    while (!atLimit)
+    while (!atLimit) // while the end of the heap isn't reached
     {
         
-        unAlloc_size = 0 ;
+        unAlloc_size = 0 ; // re-initialization at each loop
         
-        while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size != size)
+        while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size != size) // size of a memory zone unallocated
         {
             unAlloc_size += (current + unAlloc_size)->size + SIZE_BLOCK_HEADER ;
         }
-        if (current == lastBlock || current + unAlloc_size == lastBlock)
+        if (current == lastBlock || current + unAlloc_size == lastBlock) //if the current is the last block our the one before
         {
-            atLimit = 1 ; // to be looked to
+            atLimit = 1 ;
         }
-        if (unAlloc_size == size)
+        if (unAlloc_size == size) // if the sizes match
         {
             current->size = (unsigned int)size ;
             current->alloc = 1 ;
-            return (current) ;
+            return (current + SIZE_BLOCK_HEADER) ;
         }
-        else if (unAlloc_size > size && unAlloc_size < bestSize)
+        else if (unAlloc_size > size && unAlloc_size < bestSize) // if the size is big enougth but smaller than bestSize
         {
             goodSize = 1 ;
             bestSize = unAlloc_size ;
