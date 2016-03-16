@@ -140,7 +140,7 @@ void *findBlock(size_t size)
             (current-SIZE_BLOCK_HEADER)->size = size ;
             (current-SIZE_BLOCK_HEADER)->alloc = 1 ;
             lastBlock = (block_header*)(current + size) ;
-            lastBlock->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
+            (lastBlock-SIZE_BLOCK_HEADER)->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
             return (current) ;
         }
         return NULL ;
