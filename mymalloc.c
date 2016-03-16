@@ -66,7 +66,6 @@ void *mymalloc(size_t size)
 size_t round4(size_t num)
 {
     size_t a = num % 4 ;
-    printf("round4 %ld \n", a) ;
     
     if (a==0) // if it is a multiple of 4
     {
