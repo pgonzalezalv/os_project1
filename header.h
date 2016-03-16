@@ -8,7 +8,7 @@ struct block_header { /*structure representing the head*/
 
 /* MACROS */
 #define SIZE_BLOCK_HEADER 4 // in BYTES
-//#define SIZE_INIT 512
+#define SIZE_INIT 512
 
 /* GLOBAL VARIABLES */
 static block_header *head = NULL ;
@@ -16,7 +16,7 @@ static block_header *lastBlock = NULL ;
 static void *tail = NULL ;
 static int initialized;
 static int initSize;
-static int SIZE_INIT ;
+//static int SIZE_INIT ;
 
 
 /* FUNCTIONS SIGNATURES */
