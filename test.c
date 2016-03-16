@@ -34,7 +34,6 @@ void test_mymalloc_2(void)
     
     unsigned int size = b->size ;
     int alloc = b->alloc ;
-    printf("%ld - %ld \n", size, alloc);
     CU_ASSERT_EQUAL(size, 32 + SIZE_BLOCK_HEADER) ;
     CU_ASSERT_EQUAL(alloc, 1) ;
 }
@@ -51,10 +50,7 @@ void test_myfree(void)
     void *ptr4 = mymalloc((size_t) 32) ;
     myfree(ptr4) ;
     
-    if (((block_header*)(ptr4- SIZE_BLOCK_HEADER))->alloc ==0)
-    {
-        CU_FAIL("Error : pointer hasn't been disassigned. mymalloc failed.") ;
-    }
+    CU_ASSERT_EQUAL(((block_header*)(ptr4- SIZE_BLOCK_HEADER))->alloc, 0) ;
 }
 
 void test_mycalloc(void)
@@ -63,10 +59,7 @@ void test_mycalloc(void)
     int i ;
     for (i=0; i<ptr5->size; i++)
     {
-        if (&ptr5[i] != 1)
-        {
-            CU_FAIL("Error : pointed zone hasn't been initialized to 0 correctly. mymalloc failed.") ;
-        }
+        CU_ASSERT_PTR_EQUAL(&prt5[i], 0) ;
     }
     myfree(ptr5) ;
     return ;
