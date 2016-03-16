@@ -156,23 +156,25 @@ void *findBlock(size_t size)
     while (!atLimit)
     {
         
+        printf("ETAPE 1 \n");
         unAlloc_size = 0 ;
         
         while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size != size)
         {
             unAlloc_size += (current + unAlloc_size)->size + SIZE_BLOCK_HEADER ;
         }
-        
+        printf("ETAPE 2 \n");
         if (current == lastBlock || current + unAlloc_size == lastBlock)
         {
             atLimit = 1 ; // to be looked to
         }
-        
+        printf("ETAPE 3 \n");
         if (unAlloc_size == size)
         {
             current->size = size ;
             current->alloc = 1 ;
             return (current) ;
+            printf("ETAPE 4 \n");
         }
         else if (unAlloc_size > size && unAlloc_size < bestSize)
         {
@@ -181,13 +183,15 @@ void *findBlock(size_t size)
             bestFit = current ;
             current += current->size ;
             printf("bestSize = %d\n", bestSize) ;
+            printf("ETAPE 5 \n");
         }
         else if (unAlloc_size < size && !atLimit)
         {
             current += unAlloc_size + SIZE_BLOCK_HEADER + (current + unAlloc_size)->size ;
+            printf("ETAPE 6 \n");
         }
     }
-    
+    printf("ETAPE 7 \n");
     if(goodSize == 0)
     {
         if (current + size > lastBlock)
@@ -200,16 +204,19 @@ void *findBlock(size_t size)
         lastBlock = (block_header*)(current + size + SIZE_BLOCK_HEADER) ;
         lastBlock->size = sizeLast - size + unAlloc_size ;
         return (current + SIZE_BLOCK_HEADER) ;
+        printf("ETAPE 8 \n");
     }
     
     if(bestFit)
     {
+        printf("ETAPE 9 \n");
         bestFit->size = (size_t)bestSize ;
         printf("bestSize = %d\n", bestSize) ;
         bestFit->alloc = 1 ;
         printf("bestFit de taille %ld puis %ld \n", bestFit, (void*)bestFit + SIZE_BLOCK_HEADER) ;
         return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
     }
+    printf("ETAPE 10 \n"); 
     return NULL ;
     
 }
