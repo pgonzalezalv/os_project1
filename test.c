@@ -34,7 +34,7 @@ void test_mymalloc_2(void)
     block_header *b = (block_header*)(ptr - SIZE_BLOCK_HEADER) ;
     printf("%ld \n", b) ;
     
-    size_t size = b->size ;
+    unsigned int size = b->size ;
     printf("%ld \n", size) ;
     int alloc = b->alloc ;
     printf("%d \n", alloc) ;
@@ -50,7 +50,6 @@ void test_mymalloc_3(void)
     {
         CU_FAIL("Error : pointer hasn't got the right size. mymalloc failed.") ;
     }
-    free(ptr) ;
 }
 
 void test_myfree(void)
