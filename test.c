@@ -62,7 +62,7 @@ void test_mycalloc(void)
     int i ;
     for (i=0; i<ptr5->size; i++)
     {
-        if (ptr5[i] != 1)
+        if (&ptr5[i] != 1)
         {
             CU_FAIL("Error : pointed zone hasn't been initialized to 0 correctly. mymalloc failed.") ;
         }
