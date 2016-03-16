@@ -1,42 +1,39 @@
 <!-- To read with Atom go to >Packages>Mardown Preview -->
 
-# Projet 1 - Implémentation de `malloc` et `free`
+### Projet 1 - Implementation of `malloc`, `calloc`, and `free`
 
-Dans le cadre de notre cours des
-[Systèmes Informatiques I](https://sites.uclouvain.be/SystInfo/),
-nous devons implémenter notre propre version, simplifiée,
-de  `malloc` et `free`, que nous appellerons `mymalloc` et `myfree`.
-L'implémentation devra satisfaire les contraintes suivantes:
+For our course
+[Systèmes Informatiques I](https://sites.uclouvain.be/SystInfo/), we had to
+implement our own, simplified, versions of `malloc`, `calloc` et `free`, that
+we will call `mymalloc`, `mycalloc` et `myfree`.
 
-* **Séquences d’appels arbitraires.** Un programme qui utilise votre
-implémentation peut effectuer des appels a `malloc`/`free` n’importe quand, et
-dans n’importe quel ordre.
-* **Réponse immédiate:** Votre implémentation doit répondre immédiatement aux
-requêtes qui lui sont effectuées. Par exemple, il est interdit de réordonner
-ou placer les requêtes dans un buffer.
-* **Seul le heap doit etre utilisé.** Les structures contenant les
-informations sur les blocs de memoire alloués doivent également se trouver
-sur le heap.
-* **Alignement**. Les blocs de memoire que votre implémentation alloue doivent
-être alignés sur 32 bits (cela signifie notamment que le pointeur que
-`mymalloc` retourne doit etre un multiple de 4).
-* **Ne pas modifier les blocs alloués.** Il est interdit de modifier ou de
-déplacer des blocs déjà alloués. Seuls les blocs libres peuvent être manipulés.
+#### Usage
 
-<!-- ### Compilation -->
+To modify the initial heap size go to line `#12` in file `./header.h`
 
+How to compile?
 
-### Arborescence
+`$ make`
 
-Les fichiers sans commentaires ont un nom suffisamment explicite pour savoir
-ce qu'ils contiennent.
+How to execute?
 
-* `./main.h`
-* `./main.c`
-* `./Makefiles`
+`$ ./exec`
+
+How to clean?
+
+`$ make clean`
+
+#### Structure
+
+Files without comments have a sufficient explicit name to understand what
+they contain :
+
+* `./header.c` contains the header used in each .c file
+* `./LICENSE`
+* `./Makefile`
+* `./mycalloc.c`
 * `./myfree.c`
-* `./myfree.h`
 * `./mymalloc.c`
-* `./mymalloc.h`
+* `./tests.c`
 
 <!-- ### Known Issues -->
