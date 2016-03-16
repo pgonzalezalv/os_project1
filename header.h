@@ -16,7 +16,7 @@ static block_header *lastBlock = NULL ;
 static void *tail = NULL ;
 static int initialized;
 static int initSize;
-static size_t SIZE_INIT ;
+static int SIZE_INIT ;
 
 
 /* FUNCTIONS SIGNATURES */

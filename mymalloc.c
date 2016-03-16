@@ -49,7 +49,7 @@ void *mymalloc(size_t size)
         // initialization of head's informations
         head->size = SIZE_INIT ;
         head->alloc = 0 ;
-        tail = head + (SIZE_INIT) ;
+        tail = head + (SIZE_INIT + SIZE_BLOCK_HEADER) ;
         lastBlock = head ;
         return mymalloc(size) ; // recursive call
     }
@@ -195,7 +195,7 @@ void *findBlock(size_t size)
     if(goodSize == 0)
     {
         printf("ETAPE 7.1 \n");
-        if (current + size > tail)
+        if ((void*)(current + size) > (void*)tail)
         {
             printf("ETAPE 7.2 \n");
             return NULL ;

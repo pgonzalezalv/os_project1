@@ -90,7 +90,7 @@ void test_mycalloc(void)
 
 int main(int argc, char *argv[])
 {
-    SIZE_INIT = (size_t) atoi (argv[1]) ;
+    SIZE_INIT = (int) atoi (argv[1]) ;
     CU_pSuite pSuite = NULL;
     
     if(CUE_SUCCESS != CU_initialize_registry())
