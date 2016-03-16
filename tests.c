@@ -84,10 +84,10 @@ int main(int argc, char *argv[])
   }
 
   if(NULL == CU_add_test(pSuite, "test_mymalloc_1", test_mymalloc_1) ||
-     NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) //||
-     //NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
-     //NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
-     //NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
+     NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) ||
+     NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
+     NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
+     NULL == CU_add_test(pSuite, "test_mycalloc", test_mycalloc)
      )
 
   {
