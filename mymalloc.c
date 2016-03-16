@@ -188,7 +188,7 @@ void *findBlock(size_t size)
     {
         printf("ETAPE 7.1 \n");
         printf("current = %ld ; size = %ld ; current + size = %ld ; tail = %ld \n",current, size, current + size, tail);
-        if ((void*)(current + size) > (void*)tail)
+        if ((void*)(current + size/4) > (void*)tail)
         {
             printf("ETAPE 7.2 \n");
             return NULL ;
