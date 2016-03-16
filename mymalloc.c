@@ -192,7 +192,8 @@ void *findBlock(size_t size)
         }
         
         size_t sizeLast = lastBlock->size ;
-        (current-SIZE_BLOCK_HEADER)->size = (unsigned int)size ;
+        printf("%ld \n", size) ;
+        (current-SIZE_BLOCK_HEADER)->size = size ;
         (current-SIZE_BLOCK_HEADER)->alloc = 1 ;
         lastBlock = (block_header*)(current + size) ;
         lastBlock->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
