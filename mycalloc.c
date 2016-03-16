@@ -23,10 +23,10 @@ void *mycalloc(size_t size)
     size_t *founded = (size_t*) malloc(size) ; // malloc call
     if (founded)
     {
-        size_t i ;
+        int i ;
         for (i=0; i<size; i++) // go through the all allocated memory
         {
-            founded[i] = 0x0 ; // initialization to 0
+            founded[i] = 0 ; // initialization to 0
         }
     }
     return(founded) ;

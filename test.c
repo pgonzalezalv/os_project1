@@ -62,7 +62,7 @@ void test_mycalloc(void)
     int i ;
     for (i=0; i<ptr5->size; i++)
     {
-        if (&ptr5[i] != 1)
+        if (ptr5[i] != 1)
         {
             CU_FAIL("Error : pointed zone hasn't been initialized to 0 correctly. mymalloc failed.") ;
         }
@@ -88,9 +88,9 @@ int main(int argc, char *argv[])
     }
     
     if(NULL == CU_add_test(pSuite, "test_mymalloc_1", test_mymalloc_1) ||
-       NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) ||
+       NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) //||
        //NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
-       NULL == CU_add_test(pSuite, "test_myfree", test_myfree) //||
+       //NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
        //NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
        )
         
