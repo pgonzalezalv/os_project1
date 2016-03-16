@@ -59,7 +59,7 @@ void test_mycalloc(void)
     int i ;
     for (i=0; i<ptr5->size; i++)
     {
-        CU_ASSERT_PTR_EQUAL(&prt5[i], 0) ;
+        CU_ASSERT_EQUAL(&prt5[i], 0) ;
     }
     myfree(ptr5) ;
     return ;
