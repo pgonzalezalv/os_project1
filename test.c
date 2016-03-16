@@ -50,7 +50,7 @@ void test_myfree(void)
     void *ptr4 = mymalloc((size_t) 32) ;
     myfree(ptr4) ;
     
-    if (((block_header)(ptr4- SIZE_BLOCK_HEADER))->alloc ==0)
+    if (((block_header*)(ptr4- SIZE_BLOCK_HEADER))->alloc ==0)
     {
         CU_FAIL("Error : pointer hasn't been disassigned. mymalloc failed.") ;
     }
