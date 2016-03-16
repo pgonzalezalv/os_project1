@@ -49,7 +49,6 @@ void *mymalloc(size_t size)
         // initialization of head's informations
         head->size = SIZE_INIT ;
         head->alloc = 0 ;
-        printf("%ld - %ld - %ld \n", head, SIZE_INIT, SIZE_BLOCK_HEADER) ;
         tail = head + (SIZE_INIT + SIZE_BLOCK_HEADER) ;
         lastBlock = head ;
         return mymalloc(size) ; // recursive call
@@ -169,7 +168,7 @@ void *findBlock(size_t size)
         }
         if (unAlloc_size == size)
         {
-            current->size = size ;
+            current->size = (unsigned int)size ;
             current->alloc = 1 ;
             return (current) ;
         }
@@ -192,22 +191,19 @@ void *findBlock(size_t size)
             return NULL ;
         }
         size_t sizeLast = lastBlock->size ;
-        current->size = size ;
+        current->size = (unsigned int)size ;
         current->alloc = 1 ;
         lastBlock = (block_header*)(current + size + SIZE_BLOCK_HEADER) ;
-        lastBlock->size = sizeLast - size + unAlloc_size ;
+        lastBlock->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
         return (current + SIZE_BLOCK_HEADER) ;
     }
     
     if(bestFit)
     {
-        bestFit->size = (size_t)bestSize ;
-        printf("bestSize = %d\n", bestSize) ;
+        bestFit->size = (unsigned int)bestSize ;
         bestFit->alloc = 1 ;
-        printf("bestFit de taille %ld puis %ld \n", bestFit, (void*)bestFit + SIZE_BLOCK_HEADER) ;
         return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
     }
-    printf("ETAPE 10 \n");
     return NULL ;
     
 }
