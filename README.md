@@ -9,7 +9,7 @@ we will call `mymalloc`, `mycalloc` et `myfree`.
 
 #### Usage
 
-To modify the initial heap size go to line `#12` in file `./header.h`
+To modify the initial heap size go to line `#12` in file `./header.h`.
 
 How to compile?
 
@@ -25,10 +25,10 @@ How to clean?
 
 #### Structure
 
-Files without comments have a sufficient explicit name to understand what
+Files without a comment have a descriptive name to understand what
 they contain :
 
-* `./header.c` contains the header used in each .c file
+* `./header.h` contains the header used in each .c file
 * `./LICENSE`
 * `./Makefile`
 * `./mycalloc.c`
@@ -36,4 +36,6 @@ they contain :
 * `./mymalloc.c`
 * `./tests.c`
 
-<!-- ### Known Issues -->
+#### Known Issues
+
+`./mymalloc.c` does not pass all the tests
