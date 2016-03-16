@@ -111,9 +111,9 @@ void *findBlock(size_t size)
         }
         if (unAlloc_size == size) // if the sizes match
         {
-            current->size = (unsigned int)size ;
-            current->alloc = 1 ;
-            return (current + SIZE_BLOCK_HEADER) ;
+            (current - SIZE_BLOCK_HEADER)->size = (unsigned int)size ;
+            (current - SIZE_BLOCK_HEADER)->alloc = 1 ;
+            return (current) ;
         }
         else if (unAlloc_size > size && unAlloc_size < bestSize) // if the size is big enougth and smaller than bestSize
         {
@@ -147,9 +147,9 @@ void *findBlock(size_t size)
     }
     else
     {
-        bestFit->size = (unsigned int)bestSize ;
-        bestFit->alloc = 1 ;
-        return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
+        (bestFit - SIZE_BLOCK_HEADER)->size = (unsigned int)bestSize ;
+        (bestFit - SIZE_BLOCK_HEADER)->alloc = 1 ;
+        return ((void*)bestFit) ;
     }
     return NULL ;
     
