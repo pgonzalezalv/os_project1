@@ -103,7 +103,7 @@ void *findBlock(size_t size)
         
         while ((current + unAlloc_size)<lastBlock && (current + unAlloc_size)->alloc == 0 && unAlloc_size != size) // size of a memory zone unallocated
         {
-            unAlloc_size += (current + unAlloc_size)->size + SIZE_BLOCK_HEADER ;
+            unAlloc_size += (current + unAlloc_size)->size ;//+ SIZE_BLOCK_HEADER ;
         }
         if (current == lastBlock || current + unAlloc_size == lastBlock) //if the current is the last block our the one before
         {
@@ -111,9 +111,9 @@ void *findBlock(size_t size)
         }
         if (unAlloc_size == size) // if the sizes match
         {
-            (current - SIZE_BLOCK_HEADER)->size = (unsigned int)size ;
-            (current - SIZE_BLOCK_HEADER)->alloc = 1 ;
-            return (current) ;
+            (current)->size = (unsigned int)size ;
+            (current)->alloc = 1 ;
+            return (current+ SIZE_BLOCK_HEADER) ;
         }
         else if (unAlloc_size > size && unAlloc_size < bestSize) // if the size is big enougth and smaller than bestSize
         {
@@ -124,7 +124,7 @@ void *findBlock(size_t size)
         }
         else if (unAlloc_size < size && !atLimit) // if the size is wrong but we can go further in the heap
         {
-            current += unAlloc_size + SIZE_BLOCK_HEADER + (current + unAlloc_size)->size ; // make a step
+            current += unAlloc_size + (current + unAlloc_size)->size ; // make a step
         }
     }
     if(goodSize == 0) // no size or bestFit have been given
@@ -137,19 +137,19 @@ void *findBlock(size_t size)
         if (lastBlock->alloc == 0) // if last block hasn't been allocated
         {
             size_t sizeLast = lastBlock->size ;
-            (current-SIZE_BLOCK_HEADER)->size = size ;
-            (current-SIZE_BLOCK_HEADER)->alloc = 1 ;
+            (current)->size = size ;
+            (current)->alloc = 1 ;
             lastBlock = (block_header*)(current + size) ;
-            (lastBlock-SIZE_BLOCK_HEADER)->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
-            return (current) ;
+            (lastBlock)->size = (unsigned int)(sizeLast - size + unAlloc_size) ;
+            return (current + SIZE_BLOCK_HEADER) ;
         }
         return NULL ;
     }
     else
     {
-        (bestFit - SIZE_BLOCK_HEADER)->size = (unsigned int)bestSize ;
-        (bestFit - SIZE_BLOCK_HEADER)->alloc = 1 ;
-        return ((void*)bestFit) ;
+        (bestFit )->size = (unsigned int)bestSize ;
+        (bestFit)->alloc = 1 ;
+        return ((void*)bestFit + SIZE_BLOCK_HEADER) ;
     }
     return NULL ;
     
