@@ -30,7 +30,7 @@ void *mymalloc(size_t size)
         return NULL ;
     }
     
-    if (head && limitBlock) /* nth mymalloc call*/
+    if (head && lastBlock) /* nth mymalloc call*/
     {
         size_t sizeRounded = round4(size) ; // round the size
         void *found = findBlock(sizeRounded) ; // find the best fit for the allocation
