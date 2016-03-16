@@ -34,6 +34,7 @@ void test_mymalloc_2(void)
     
     unsigned int size = b->size ;
     int alloc = b->alloc ;
+    printf("%ld - %ld \n", size, alloc);
     CU_ASSERT_EQUAL(size, 32 + SIZE_BLOCK_HEADER) ;
     CU_ASSERT_EQUAL(alloc, 1) ;
 }
