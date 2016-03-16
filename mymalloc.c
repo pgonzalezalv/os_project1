@@ -135,7 +135,6 @@ void *findBlock(size_t size)
         }
         
         size_t sizeLast = lastBlock->size ;
-        printf("%ld \n", size) ;
         (current-SIZE_BLOCK_HEADER)->size = size ;
         (current-SIZE_BLOCK_HEADER)->alloc = 1 ;
         lastBlock = (block_header*)(current + size) ;
