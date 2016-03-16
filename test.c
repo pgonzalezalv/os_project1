@@ -50,7 +50,7 @@ void test_myfree(void)
     void *ptr4 = mymalloc((size_t) 32) ;
     myfree(ptr4) ;
     
-    if (ptr != NULL)
+    if (((block_header)(ptr- SIZE_BLOCK_HEADER))->alloc ==0)
     {
         CU_FAIL("Error : pointer hasn't been disassigned. mymalloc failed.") ;
     }
@@ -88,10 +88,10 @@ int main(int argc, char *argv[])
     }
     
     if(NULL == CU_add_test(pSuite, "test_mymalloc_1", test_mymalloc_1) ||
-       NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) ||
-       NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
-       NULL == CU_add_test(pSuite, "test_myfree", test_myfree) ||
-       NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
+       NULL == CU_add_test(pSuite, "test_mymalloc_2", test_mymalloc_2) //||
+       //NULL == CU_add_test(pSuite, "test_mymalloc_3", test_mymalloc_3) ||
+       NULL == CU_add_test(pSuite, "test_myfree", test_myfree) //||
+       //NULL == CU_add_test(pSuite, "test_myfree", test_myfree)
        )
         
     {
