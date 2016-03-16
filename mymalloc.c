@@ -195,12 +195,12 @@ void *findBlock(size_t size)
     if(goodSize == 0)
     {
         printf("ETAPE 7.1 \n");
-        if (current + size > lastBlock)
+        if (current + size > tail)
         {
             printf("ETAPE 7.2 \n");
             return NULL ;
         }
-        printf("ETAPE 7.3 \n"); 
+        printf("ETAPE 7.3 \n");
         size_t sizeLast = lastBlock->size ;
         current->size = size ;
         current->alloc = 1 ;
